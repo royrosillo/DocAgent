@@ -7,6 +7,11 @@ class DocService:
     """Genera documentación usando Claude."""
 
     def __init__(self):
+        """Inicializa el servicio de documentación.
+        
+        Crea una instancia del cliente de Anthropic usando la clave API
+        configurada en las variables de entorno.
+        """
         self.client = anthropic.Anthropic(api_key=settings.ANTHROPIC_API_KEY)
 
     async def generate_docs(
@@ -65,6 +70,17 @@ Devuelve ÚNICAMENTE el archivo completo con los docstrings añadidos, sin expli
         return result
 
     def _format_functions_for_prompt(self, functions: list[FunctionInfo]) -> str:
+        """Formatea la lista de funciones para incluir en el prompt de Claude.
+        
+        Convierte los objetos FunctionInfo en un formato legible que incluye
+        el nombre, número de línea y firma de cada función.
+        
+        Args:
+            functions: Lista de funciones a documentar.
+            
+        Returns:
+            Cadena con las funciones formateadas, una por línea.
+        """
         lines = []
         for f in functions:
             lines.append(f"- {f.name} (línea {f.start_line + 1}): {f.signature}")
