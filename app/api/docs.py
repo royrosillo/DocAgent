@@ -7,11 +7,27 @@ router = APIRouter()
 
 
 class GenerateRequest(BaseModel):
+    """
+    Modelo de solicitud para generar documentación de código.
+    
+    Attributes:
+        content (str): Contenido del archivo de código a documentar.
+        file_path (str): Ruta del archivo de código para contexto del parseador.
+    """
     content: str
     file_path: str
 
 
 class GenerateResponse(BaseModel):
+    """
+    Modelo de respuesta con resultados de la generación de documentación.
+    
+    Attributes:
+        original_content (str): Contenido original del archivo sin cambios.
+        documented_content (str): Contenido del archivo con documentación generada.
+        functions_found (int): Cantidad total de funciones sin documentar encontradas.
+        file_path (str): Ruta del archivo procesado.
+    """
     original_content: str
     documented_content: str
     functions_found: int
