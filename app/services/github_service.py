@@ -4,9 +4,21 @@ from app.core.config import settings
 
 
 class GitHubService:
+    """
+    Servicio para interactuar con la API de GitHub.
+    
+    Proporciona métodos para leer contenido de archivos, gestionar ramas,
+    actualizar archivos y crear pull requests de forma automática.
+    """
     BASE_URL = "https://api.github.com"
 
     def __init__(self):
+        """
+        Inicializa el servicio de GitHub con los headers necesarios para autenticación.
+        
+        Configura los headers estándar incluyendo token de autenticación, versión de API
+        y tipos de contenido aceptados requeridos por la API de GitHub.
+        """
         self.headers = {
             "Authorization": f"Bearer {settings.GITHUB_TOKEN}",
             "Accept": "application/vnd.github+json",
